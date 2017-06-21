@@ -5,4 +5,4 @@
 
 npm run build
 rm -rf ~/dev/etudes-apps/assets/src/main/resources/mneme
-cp -pr ~/dev/mneme-react/build ~/dev/etudes-apps/assets/src/main/resources/mneme
+cp -pr ~/dev/etudes-mneme-react/build ~/dev/etudes-apps/assets/src/main/resources/mneme
