@@ -1,3 +1,28 @@
+/**********************************************************************************
+ *
+ * Copyright (c) 2017 Etudes, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ **********************************************************************************/
+
+/*
+AsmtsList.js
+Mneme / React UI / Views / Management View / Assessments List View-Component
+
+A list of assessments component, with management features.
+*/
+
 import React, { Component } from 'react';
 import { string } from 'prop-types'
 import TableActions from '../components/TableActions';
@@ -8,6 +33,7 @@ import API from '../services/API';
 
 class AsmtsList extends Component {
 
+  // No properties
   static propTypes = {
   }
 
@@ -17,19 +43,24 @@ class AsmtsList extends Component {
   constructor(props) {
     super(props);
 
+    // we keep a list of assessments in state
     this.state = {asmts: []};
 
+    // some constants
     this.iconStyle = {textAlign: "center", width: 16};
     this.tableHeaders = ["", "", "Status", "Type", "Title", "Open", "Due", "AllowUntil", ""];
   }
 
   componentDidMount() {
+    // load our assessments
     this.load();
   }
 
   componentWillUnmount() {
   }
 
+  // load assessments for the context associated with the current authentication
+  // TODO: we might not want to load in here, but instead, pass in via props
   load() {
     fetch("/api/mneme/assessments" + API.tokensQuery())
       .then((response) => {return response.json();})
@@ -38,18 +69,21 @@ class AsmtsList extends Component {
       });
   }
 
+  // accept data from the server, assuring we have good formats (dates)
   accept(data) {
     data.forEach((asmt) => {
-      // make real dates
-      if ((asmt.open != null) && (!(asmt.open instanceof Date))) {
-        asmt.open = new Date(asmt.open);
+      // make real dates from the schedule
+      if ((asmt.schedule.open != null) && (!(asmt.schedule.open instanceof Date))) {
+        asmt.schedule.open = new Date(asmt.schedule.open);
       }
-      if ((asmt.due != null) && (!(asmt.due instanceof Date))) {
-        asmt.due = new Date(asmt.due);
+      if ((asmt.schedule.due != null) && (!(asmt.schedule.due instanceof Date))) {
+        asmt.schedule.due = new Date(asmt.schedule.due);
       }
-      if ((asmt.until != null) && (!(asmt.until instanceof Date))) {
-        asmt.until = new Date(asmt.until);
+      if ((asmt.schedule.until != null) && (!(asmt.schedule.until instanceof Date))) {
+        asmt.schedule.until = new Date(asmt.schedule.until);
       }
+
+      // TODO: what else?
     });
 
     // set the new state
@@ -57,42 +91,7 @@ class AsmtsList extends Component {
     this.setState(newState);
   }
 
-  mockAsmts() {
-    const asmts = [
-      {
-        id: 1,
-        published: true,
-        valid: true,
-        type: "A",
-        title: "First Test",
-        open: 1497882740761,
-        due: 1497882740761,
-        until: null
-      },
-      {
-        id: 2,
-        published: true,
-        valid: true,
-        type: "A",
-        title: "Second Test",
-        open: new Date("July 11, 2017"),
-        due: new Date("July 20, 2017"),
-        until: null
-      },
-      {
-        id: 3,
-        published: false,
-        valid: false,
-        type: "A",
-        title: "Last Test",
-        open: new Date("July 21, 2017"),
-        due: new Date("July 30, 2017"),
-        until: null
-      },
-    ];
-    return asmts;
-  }
-
+  // make a display string from a n (alleged) date
   date(d) {
     if ((d == null) || (!(d instanceof Date))) {
       return "";
@@ -101,21 +100,23 @@ class AsmtsList extends Component {
     }
   }
 
+  // make a display to show the published status, as a colored icon
   publishedIcon(asmt) {
-    const red = {color: "rgb(0, 186, 0)"};
-    const green = {color: "rgb(220, 0, 0)"};
+    const green  = {color: "rgb(0, 186, 0)"};
+    const red = {color: "rgb(220, 0, 0)"};
 
-    if (asmt.published) {
+    if (asmt.status.published) {
       return <Glyphicon glyph="ok-sign" title="published" style={green} />
     } else {
       return <Glyphicon glyph="minus-sign" title="unpublished" style={red} />
     }
   }
 
+  // make a display to show the invalid setting, as a colored icon
   invalidIcon(asmt) {
     const color = {color: "#ff8005"};
 
-    if (!asmt.valid) {
+    if (!asmt.status.valid) {
       return <Glyphicon glyph="warning-sign" title="Invalid" style={color} />
     } else {
       return null;
@@ -132,9 +133,9 @@ class AsmtsList extends Component {
         <td style={this.iconStyle}>{this.publishedIcon(asmt)}</td>
         <td>{asmt.type}</td>
         <td>{asmt.title}</td>
-        <td>{this.date(asmt.open)}</td>
-        <td>{this.date(asmt.due)}</td>
-        <td>{this.date(asmt.until)}</td>
+        <td>{this.date(asmt.schedule.open)}</td>
+        <td>{this.date(asmt.schedule.due)}</td>
+        <td>{this.date(asmt.schedule.until)}</td>
         <td>
           <IconButton glyph="cog" tip="Set Options" />
           <IconButton glyph="user" tip="Add Special Access" />
