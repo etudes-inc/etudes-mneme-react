@@ -30,7 +30,7 @@ class TableActions extends Component {
   render() {
     return (
       <Well bsSize="small">
-        <IconButton glyph="plus-sign" text="Add" href="/EditAsmt" />
+        <IconButton glyph="plus-sign" text="Add" href="/EditAsmt/0" />
         <IconButton glyph="remove-sign" text="Delete" />
         <IconButton glyph="ok-sign" text="Publish" />
         <IconButton glyph="minus-sign" text="Unpublish" />

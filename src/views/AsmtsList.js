@@ -29,6 +29,7 @@ import TableCheckbox from '../components/TableCheckbox';
 import IconButton from '../components/IconButton';
 import { Table, Glyphicon } from 'react-bootstrap';
 import API from '../services/API';
+import Assessment from '../services/Assessment';
 
 class AsmtsList extends Component {
 
@@ -71,18 +72,7 @@ class AsmtsList extends Component {
   // accept data from the server, assuring we have good formats (dates)
   accept(data) {
     data.forEach((asmt) => {
-      // make real dates from the schedule
-      if ((asmt.schedule.open != null) && (!(asmt.schedule.open instanceof Date))) {
-        asmt.schedule.open = new Date(asmt.schedule.open);
-      }
-      if ((asmt.schedule.due != null) && (!(asmt.schedule.due instanceof Date))) {
-        asmt.schedule.due = new Date(asmt.schedule.due);
-      }
-      if ((asmt.schedule.until != null) && (!(asmt.schedule.until instanceof Date))) {
-        asmt.schedule.until = new Date(asmt.schedule.until);
-      }
-
-      // TODO: what else?
+      Assessment.adjustAssessmentFromServer(asmt);
     });
 
     // set the new state

@@ -24,6 +24,7 @@ Edit an assessment.
 */
 
 import React, { Component } from 'react';
+import { number } from 'prop-types'
 import { Well, Alert, Label, FormGroup, ControlLabel, FormControl, Radio, Checkbox } from 'react-bootstrap';
 import Container from '../components/Container';
 import Block from '../components/Block';
@@ -31,60 +32,76 @@ import Footer from '../components/Footer';
 import AsmtsModes from '../views/AsmtsModes';
 import IconButton from '../components/IconButton';
 import API from '../services/API';
+import Assessment from '../services/Assessment';
+
 // import { Link } from 'react-router-dom';
 
 class EditAsmt extends Component {
 
-  // No props
   static propTypes = {
+    id: number                    // assessment id to edit - 0 for new (may also come from router match.params)
   }
 
   static defaultProps = {
+    id: 0
   }
 
   constructor(props) {
     super(props);
 
-    // TODO: proper asmt to edit in state
-    this.state = {asmt: {title:"", type:"T"}};
+    // promote the Router match params to the object level
+    if (props.match.params.id !== undefined) {
+      this.id = parseInt(props.match.params.id, 10);
+    } else {
+      this.id = props.id;
+    }
 
-    // this.handleNav = this.handleNav.bind(this);
+    this.state = {asmt: Assessment.newAssessment()};
+
     this.handleDone = this.handleDone.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
+  loadAssessment() {
+    fetch("/api/mneme/assessments/" + this.id + API.tokensQuery())
+      .then((response) => {return response.json();})
+      .then((data) => {
+        Assessment.adjustAssessmentFromServer(data);
+        const newState = {asmt: data};
+        this.setState(newState);
+      });
+  }
+
+  saveAssessment() {
+    // https://davidwalsh.name/fetch
+    // fetch('https://davidwalsh.name/submit-json', {
+    // method: 'post',
+    // body: JSON.stringify({
+    // email: document.getElementById('email').value
+    // answer: document.getElementById('answer').value
+    // })
+    // });
+  }
+
   componentDidMount() {
+    if (this.id !== 0) {
+      this.loadAssessment();
+    }
   }
 
   componentWillUnmount() {
   }
 
-  // see: https://github.com/ReactTraining/history
-
-  // handleNav(eventKey) {
-  //   switch (eventKey) {
-  //     case 1:
-  //       this.handleDone();
-  //       break;
-  //     case 2:
-  //       this.handleSave();
-  //       break;
-  //     default:
-  //       alert(`unknown`);
-  //       break;
-  //   }
-  // }
-
   handleDone() {
-    // link back to the assessments main view
+    // TODO: need to save...
     const link = "/Asmts" + API.tokensQuery();
-
     this.props.history.push(link);
     // this.props.history.goBack();
   }
 
   handleSave() {
+    // TODO: need to save...
     alert(`saved: ${this.state.asmt.title} ${this.state.asmt.type}`);
   }
 
@@ -104,7 +121,7 @@ class EditAsmt extends Component {
       <div>
         <Container>
           <Block><AsmtsModes /></Block>
-          <h2><Label>Edit Assessment</Label></h2>
+          <h2><Label>Edit Assessment: {this.id}</Label></h2>
           <Block>
             <form>
               <FormGroup>

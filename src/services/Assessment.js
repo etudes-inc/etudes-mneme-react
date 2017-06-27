@@ -16,31 +16,30 @@
  *
  **********************************************************************************/
 
- /*
- App.js
- Mneme / React UI / App
+// Support service for working with Assessments
+class Assessment {
+  static adjustAssessmentFromServer(asmt) {
+    // make real dates from the schedule
+    if ((asmt.schedule.open != null) && (!(asmt.schedule.open instanceof Date))) {
+      asmt.schedule.open = new Date(asmt.schedule.open);
+    }
+    if ((asmt.schedule.due != null) && (!(asmt.schedule.due instanceof Date))) {
+      asmt.schedule.due = new Date(asmt.schedule.due);
+    }
+    if ((asmt.schedule.until != null) && (!(asmt.schedule.until instanceof Date))) {
+      asmt.schedule.until = new Date(asmt.schedule.until);
+    }
 
- The main management app for Mneme, with the router.
- */
+    // TODO: what else?
+  }
 
-import React, { Component } from 'react';
-import Asmts from "./views/Asmts";
-import EditAsmt from "./views/EditAsmt";
-import SampleApp from "./views/SampleApp";
-import {BrowserRouter, Route} from 'react-router-dom';
-
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <div>
-          <Route exact path='/Asmts' component={Asmts} />
-          <Route exact path='/EditAsmt/:id' component={EditAsmt} />
-          <Route exact path='/Sample' component={SampleApp} />
-        </div>
-      </BrowserRouter>
-    );
+  static newAssessment() {
+    return {
+      id: 0,
+      title: "",
+      type: "T"
+    };
   }
 }
 
-export default App;
+export default Assessment;
