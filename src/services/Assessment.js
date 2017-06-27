@@ -30,14 +30,25 @@ class Assessment {
       asmt.schedule.until = new Date(asmt.schedule.until);
     }
 
+    // title should be set
+    if (asmt.title == null) {
+      asmt.title = "";
+    }
+
     // TODO: what else?
   }
 
   static newAssessment() {
     return {
+      context: null,
+      created: {date: null, userId: 0},
       id: 0,
+      modified: {date:null, userId: 0},
+      schedule: {archived: null, due: null, hideUntilOpen: false, open: null, until: null},
+      status: {published: true, valid: true},
+      subscription: 0,
       title: "",
-      type: "T"
+      type: "test"
     };
   }
 }

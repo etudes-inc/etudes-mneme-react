@@ -23,18 +23,18 @@ Mneme / React UI / Views / Management View / Edit Assessment View
 Edit an assessment.
 */
 
-import React, { Component } from 'react';
-import { number } from 'prop-types'
-import { Well, Alert, Label, FormGroup, ControlLabel, FormControl, Radio, Checkbox } from 'react-bootstrap';
-import Container from '../components/Container';
-import Block from '../components/Block';
-import Footer from '../components/Footer';
-import AsmtsModes from '../views/AsmtsModes';
-import IconButton from '../components/IconButton';
-import API from '../services/API';
-import Assessment from '../services/Assessment';
+import React, { Component } from "react";
+import { number } from "prop-types"
+import { Well, Alert, Label, FormGroup, ControlLabel, FormControl, Radio, Checkbox } from "react-bootstrap";
+import Container from "../components/Container";
+import Block from "../components/Block";
+import Footer from "../components/Footer";
+import AsmtsModes from "../views/AsmtsModes";
+import IconButton from "../components/IconButton";
+import API from "../services/API";
+import Assessment from "../services/Assessment";
 
-// import { Link } from 'react-router-dom';
+// import { Link } from "react-router-dom";
 
 class EditAsmt extends Component {
 
@@ -74,14 +74,21 @@ class EditAsmt extends Component {
   }
 
   saveAssessment() {
-    // https://davidwalsh.name/fetch
-    // fetch('https://davidwalsh.name/submit-json', {
-    // method: 'post',
-    // body: JSON.stringify({
-    // email: document.getElementById('email').value
-    // answer: document.getElementById('answer').value
-    // })
-    // });
+    const settings = {
+      method: "put",
+      body: JSON.stringify(this.state.asmt),
+      headers: {'Content-Type':'application/json'}
+    };
+
+    fetch("/api/mneme/assessments/" + this.id + API.tokensQuery(), settings)
+      .then((response) => {return response.json();})
+      .then((updatedAsmt) => {
+        Assessment.adjustAssessmentFromServer(updatedAsmt);
+        const newState = {asmt: updatedAsmt};
+        this.setState(newState);
+
+        // TODO: and the  ...
+      });
   }
 
   componentDidMount() {
@@ -94,20 +101,21 @@ class EditAsmt extends Component {
   }
 
   handleDone() {
-    // TODO: need to save...
+    this.saveAssessment();
+
+    // TODO: wait for save to be done?
     const link = "/Asmts" + API.tokensQuery();
     this.props.history.push(link);
     // this.props.history.goBack();
   }
 
   handleSave() {
-    // TODO: need to save...
-    alert(`saved: ${this.state.asmt.title} ${this.state.asmt.type}`);
+    this.saveAssessment();
   }
 
   handleChange(event) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
     this.setState((prevState, props) => {
@@ -126,19 +134,19 @@ class EditAsmt extends Component {
             <form>
               <FormGroup>
                 <ControlLabel>Type</ControlLabel>
-                <Radio name="type" value="T" checked={this.state.asmt.type==="T"}
+                <Radio name="type" value="test" checked={this.state.asmt.type==="test"}
                     onChange={this.handleChange}>
                   Test
                 </Radio>
-                <Radio name="type" value="A" checked={this.state.asmt.type==="A"}
+                <Radio name="type" value="assignment" checked={this.state.asmt.type==="assignment"}
                     onChange={this.handleChange}>
                   Assignment
                 </Radio>
-                <Radio name="type" value="S" checked={this.state.asmt.type==="S"}
+                <Radio name="type" value="survey" checked={this.state.asmt.type==="survey"}
                     onChange={this.handleChange}>
                   Survey
                 </Radio>
-                <Radio name="type" value="O" checked={this.state.asmt.type==="O"}
+                <Radio name="type" value="offline" checked={this.state.asmt.type==="offline"}
                     onChange={this.handleChange}>
                   Online
                 </Radio>
