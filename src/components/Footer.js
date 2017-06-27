@@ -42,7 +42,12 @@ class Footer extends Component {
     return (
       <div className="navbar navbar-default navbar-fixed-bottom" style={style1}>
         <div style={style2}>
-          <a className="btn btn-link btn-xs pull-right" href={this.props.link} target="_blank">{this.props.name} &copy; {this.props.copyright} {this.props.holder}</a>
+          <a  className="btn btn-link btn-xs pull-right"
+              href={this.props.link}
+              target="_blank"
+              rel="noopener noreferrer">
+            {this.props.name} &copy; {this.props.copyright} {this.props.holder}
+          </a>
         </div>
       </div>
     );

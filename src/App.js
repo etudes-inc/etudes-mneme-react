@@ -25,6 +25,7 @@
 
 import React, { Component } from 'react';
 import Asmts from "./views/Asmts";
+import EditAsmt from "./views/EditAsmt";
 import SampleApp from "./views/SampleApp";
 import {BrowserRouter, Route} from 'react-router-dom';
 
@@ -34,6 +35,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Route exact path='/Asmts' component={Asmts} />
+          <Route exact path='/EditAsmt' component={EditAsmt} />
           <Route exact path='/Sample' component={SampleApp} />
         </div>
       </BrowserRouter>

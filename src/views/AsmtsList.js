@@ -24,7 +24,6 @@ A list of assessments component, with management features.
 */
 
 import React, { Component } from 'react';
-import { string } from 'prop-types'
 import TableActions from '../components/TableActions';
 import TableCheckbox from '../components/TableCheckbox';
 import IconButton from '../components/IconButton';

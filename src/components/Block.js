@@ -21,7 +21,11 @@ import React, { Component } from 'react';
 // Provide a UI zone with some spacing
 class Block extends Component {
   render() {
-    const style={marginTop: 20};
+    let margin = 20;
+    if (this.props.x !== undefined) {
+      margin *= parseInt(this.props.x, 10);
+    }
+    const style={marginTop: margin};
 
     return (
       <div style={style}>

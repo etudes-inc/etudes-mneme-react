@@ -17,7 +17,7 @@
  **********************************************************************************/
 
 import React, { Component } from 'react';
-import { string } from 'prop-types'
+import { string, func } from 'prop-types'
 import { Glyphicon } from 'react-bootstrap';
 
 // A UI button rendered as a small icon
@@ -26,13 +26,17 @@ class IconButton extends Component {
   static propTypes = {
     glyph: string,              // bootstrap glyph to display
     text: string,               // text to display
-    tip: string                 // tool tip to display when hovering
+    tip: string,                // tool tip to display when hovering
+    href: string,               // location change for the button press
+    onClick: func               // callback for the button press
   }
 
   static defaultProps = {
     glyph: "star",
     text: "",
-    tip: ""
+    tip: "",
+    href: null,
+    onClick: null
   }
 
   render() {
@@ -40,7 +44,12 @@ class IconButton extends Component {
 
 //   <a href><Glyphicon style={spacing} glyph="star" /> Add</a>
     return (
-      <a href style={spacing} title={this.props.tip}><Glyphicon glyph={this.props.glyph} /> {this.props.text}</a>
+      <a  href={this.props.href}
+          onClick ={this.props.onClick}
+          style={spacing}
+          title={this.props.tip}>
+        <Glyphicon glyph={this.props.glyph} /> {this.props.text}
+      </a>
     );
   }
 }

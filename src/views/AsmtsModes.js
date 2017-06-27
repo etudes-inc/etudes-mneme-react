@@ -24,7 +24,6 @@
  */
 
 import React, { Component } from 'react';
-import { string } from 'prop-types'
 import { Nav, NavItem , Glyphicon } from 'react-bootstrap';
 
 class AsmtsModes extends Component {

@@ -24,7 +24,6 @@ The main, list of assessments view, for instructors and other assessment manager
 */
 
 import React, { Component } from 'react';
-import { string } from 'prop-types'
 import { Alert } from 'react-bootstrap';
 import Container from '../components/Container';
 import Block from '../components/Block';
