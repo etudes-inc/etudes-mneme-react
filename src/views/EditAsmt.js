@@ -45,9 +45,13 @@ class EditAsmt extends Component {
   constructor(props) {
     super(props);
 
+    // TODO: proper asmt to edit in state
+    this.state = {asmt: {title:"", type:"T"}};
+
     // this.handleNav = this.handleNav.bind(this);
     this.handleDone = this.handleDone.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -81,7 +85,18 @@ class EditAsmt extends Component {
   }
 
   handleSave() {
-    alert(`saved`);
+    alert(`saved: ${this.state.asmt.title} ${this.state.asmt.type}`);
+  }
+
+  handleChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState((prevState, props) => {
+      prevState.asmt[name] = value;
+      return prevState;
+    });
   }
 
   render() {
@@ -94,24 +109,28 @@ class EditAsmt extends Component {
             <form>
               <FormGroup>
                 <ControlLabel>Type</ControlLabel>
-                <Radio name="radioGroup">
+                <Radio name="type" value="T" checked={this.state.asmt.type==="T"}
+                    onChange={this.handleChange}>
                   Test
                 </Radio>
-                {' '}
-                <Radio name="radioGroup">
+                <Radio name="type" value="A" checked={this.state.asmt.type==="A"}
+                    onChange={this.handleChange}>
                   Assignment
                 </Radio>
-                {' '}
-                <Radio name="radioGroup">
+                <Radio name="type" value="S" checked={this.state.asmt.type==="S"}
+                    onChange={this.handleChange}>
                   Survey
                 </Radio>
-                <Radio name="radioGroup">
+                <Radio name="type" value="O" checked={this.state.asmt.type==="O"}
+                    onChange={this.handleChange}>
                   Online
                 </Radio>
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Title</ControlLabel>
-                <FormControl type="text" placeholder="Title" />
+                <FormControl type="text" placeholder="Title"
+                    value={this.state.asmt.title}
+                    name="title" onChange={this.handleChange} />
               </FormGroup>
               <Checkbox>
                 This is for points
