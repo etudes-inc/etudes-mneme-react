@@ -27,18 +27,18 @@ import React, {Component} from 'react';
 import Asmts from "./views/Asmts";
 import EditAsmt from "./views/EditAsmt";
 import SampleApp from "./views/SampleApp";
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Route exact path='/Asmts' component={Asmts} />
-          <Route exact path='/EditAsmt/:id' component={EditAsmt} />
-          <Route exact path='/Sample' component={SampleApp} />
-          <Redirect exact from="/" to="/Asmts"/>
-        </div>
+        <Switch>
+          <Route path='/Asmts' component={Asmts} />
+          <Route path='/EditAsmt/:id' component={EditAsmt} />
+          <Route path='/Sample' component={SampleApp} />
+          <Redirect from="/" to="/Asmts"/>
+        </Switch>
       </Router>
     );
   }
