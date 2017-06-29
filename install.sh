@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# install.hs
+# install.sh
 # create a production package of this front-end and install it
 
 npm run build
