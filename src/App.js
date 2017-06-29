@@ -23,22 +23,23 @@
  The main management app for Mneme, with the router.
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Asmts from "./views/Asmts";
 import EditAsmt from "./views/EditAsmt";
 import SampleApp from "./views/SampleApp";
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <Router>
         <div>
           <Route exact path='/Asmts' component={Asmts} />
           <Route exact path='/EditAsmt/:id' component={EditAsmt} />
           <Route exact path='/Sample' component={SampleApp} />
+          <Redirect exact from="/" to="/Asmts"/>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
