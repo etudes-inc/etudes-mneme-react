@@ -27,20 +27,20 @@ class Hello extends Component {
   }
 
   componentDidMount() {
-    this.load();
+    // this.load();
   }
 
   componentWillUnmount() {
   }
 
-  load() {
-    fetch("/api/mneme/message")
-      .then((response) => {return response.json();})
-      .then((data) => {
-        const newState = {msg: data.message};
-        this.setState(newState);
-      });
-  }
+  // load() {
+  //   fetch("/api/mneme/message")
+  //     .then((response) => {return response.json();})
+  //     .then((data) => {
+  //       const newState = {msg: data.message};
+  //       this.setState(newState);
+  //     });
+  // }
 
   render() {
     return (

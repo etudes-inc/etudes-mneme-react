@@ -87,7 +87,7 @@ class Asmts extends Component {
     ) : null;
 
     // a TEMP feature to show routing
-    const link = "/Sample" + API.tokensQuery();
+    const link = "/Sample/boo" + API.tokensQuery();
 
     return (
       <div>

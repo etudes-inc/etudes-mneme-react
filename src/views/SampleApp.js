@@ -22,7 +22,7 @@
 
  A sample of another view we can route to and from in Mneme.
  */
- 
+
 import React, { Component } from 'react';
 import SampleHdr from "../views/SampleHdr";
 import Container from "../components/Container";
@@ -39,7 +39,7 @@ class SampleApp extends Component {
     this.title = "This will someday be Mneme";
 
     this.state = {
-      msg: "Working ...",
+      msg: props.match.params.msg,
       count: 1
     };
 

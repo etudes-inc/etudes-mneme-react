@@ -18,6 +18,7 @@
 
 import React, { Component } from 'react';
 import IconButton from '../components/IconButton';
+import IconLink from '../components/IconLink';
 import { Well } from 'react-bootstrap';
 
 // A UI component showing a list of actions related to the table below
@@ -30,7 +31,7 @@ class TableActions extends Component {
   render() {
     return (
       <Well bsSize="small">
-        <IconButton glyph="plus-sign" text="Add" href="/EditAsmt/0" />
+        <IconLink glyph="plus-sign" text="Add" route="/EditAsmt/0" />
         <IconButton glyph="remove-sign" text="Delete" />
         <IconButton glyph="ok-sign" text="Publish" />
         <IconButton glyph="minus-sign" text="Unpublish" />

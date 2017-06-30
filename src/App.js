@@ -36,7 +36,7 @@ class App extends Component {
         <Switch>
           <Route path='/Asmts' component={Asmts} />
           <Route path='/EditAsmt/:id' component={EditAsmt} />
-          <Route path='/Sample' component={SampleApp} />
+          <Route path='/Sample/:msg' component={SampleApp} />
           <Redirect from="/" to="/Asmts"/>
         </Switch>
       </Router>
