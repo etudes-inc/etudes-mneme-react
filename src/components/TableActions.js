@@ -17,7 +17,6 @@
  **********************************************************************************/
 
 import React, { Component } from 'react';
-import IconButton from '../components/IconButton';
 import IconLink from '../components/IconLink';
 import { Well } from 'react-bootstrap';
 
@@ -31,15 +30,15 @@ class TableActions extends Component {
   render() {
     return (
       <Well bsSize="small">
-        <IconLink glyph="plus-sign" text="Add" route="/EditAsmt/0" />
-        <IconButton glyph="remove-sign" text="Delete" />
-        <IconButton glyph="ok-sign" text="Publish" />
-        <IconButton glyph="minus-sign" text="Unpublish" />
-        <IconButton glyph="open" text="Archive" />
-        <IconButton glyph="save" text="Restore" />
-        <IconButton glyph="import" text="Import" />
-        <IconButton glyph="export" text="Export" />
-        <IconButton glyph="cog" text="Set Options" />
+        <IconLink glyph="plus-sign" text="Add" tip="Add Assessment" route="/EditAsmt/0" />
+        <IconLink glyph="remove-sign" text="Delete" />
+        <IconLink glyph="ok-sign" text="Publish" />
+        <IconLink glyph="minus-sign" text="Unpublish" />
+        <IconLink glyph="open" text="Archive" />
+        <IconLink glyph="save" text="Restore" />
+        <IconLink glyph="import" text="Import" />
+        <IconLink glyph="export" text="Export" />
+        <IconLink glyph="cog" text="Set Options" />
       </Well>
     );
   }
