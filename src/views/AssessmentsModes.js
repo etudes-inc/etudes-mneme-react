@@ -17,7 +17,7 @@
  **********************************************************************************/
 
  /*
- AsmtsModes.js
+ AssessmentsModes.js
  Mneme / React UI / Views / Management View / Assessments Modes View-Component
 
  The modes UI offering the different management modes in Mneme.
@@ -26,7 +26,7 @@
 import React, { Component } from 'react';
 import { Nav, NavItem , Glyphicon } from 'react-bootstrap';
 
-class AsmtsModes extends Component {
+class AssessmentsModes extends Component {
 
   static propTypes = {
   }
@@ -62,4 +62,4 @@ class AsmtsModes extends Component {
   }
 }
 
-export default AsmtsModes;
+export default AssessmentsModes;

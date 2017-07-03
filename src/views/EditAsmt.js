@@ -26,10 +26,7 @@ Edit an assessment.
 import React, { Component } from "react";
 import { number } from "prop-types"
 import { Well, Alert, Label, FormGroup, ControlLabel, FormControl, Radio, Checkbox } from "react-bootstrap";
-import Container from "../components/Container";
 import Block from "../components/Block";
-import Footer from "../components/Footer";
-import AsmtsModes from "../views/AsmtsModes";
 import IconButton from "../components/IconButton";
 import API from "../services/API";
 import Assessment from "../services/Assessment";
@@ -128,65 +125,61 @@ class EditAsmt extends Component {
   render() {
     return (
       <div>
-        <Container>
-          <Block><AsmtsModes /></Block>
-          <h2><Label>Edit Assessment: {this.id}</Label></h2>
-          <Block>
-            <form>
-              <FormGroup>
-                <ControlLabel>Type</ControlLabel>
-                <Radio name="type" value="test" checked={this.state.asmt.type==="test"}
-                    onChange={this.handleChange}>
-                  Test
-                </Radio>
-                <Radio name="type" value="assignment" checked={this.state.asmt.type==="assignment"}
-                    onChange={this.handleChange}>
-                  Assignment
-                </Radio>
-                <Radio name="type" value="survey" checked={this.state.asmt.type==="survey"}
-                    onChange={this.handleChange}>
-                  Survey
-                </Radio>
-                <Radio name="type" value="offline" checked={this.state.asmt.type==="offline"}
-                    onChange={this.handleChange}>
-                  Online
-                </Radio>
-              </FormGroup>
-              <FormGroup>
-                <ControlLabel>Title</ControlLabel>
-                <FormControl type="text" placeholder="Title"
-                    value={this.state.asmt.title}
-                    name="title" onChange={this.handleChange} />
-              </FormGroup>
-              <Checkbox>
-                This is for points
-              </Checkbox>
-              <div><IconButton glyph="check" text="Edit Instructions" onClick={this.handleDone} /></div>
-              <div><IconButton glyph="check" text="Manage Parts" onClick={this.handleDone} /></div>
-              <div><IconButton glyph="cog" text="Set Options" onClick={this.handleDone} /></div>
-              <Block>
-                <ControlLabel>Questions</ControlLabel>
-                <Well bsSize="small">
-                  <IconButton glyph="check" text="Add" onClick={this.handleDone} />
-                  <IconButton glyph="floppy-save" text="Select" onClick={this.handleSave} />
-                  <IconButton glyph="floppy-save" text="Draw" onClick={this.handleSave} />
-                  <IconButton glyph="floppy-save" text="Move" onClick={this.handleSave} />
-                  <IconButton glyph="floppy-save" text="Remove" onClick={this.handleSave} />
-                </Well>
-                <Alert bsStyle="info">
-                  No Questions
-                </Alert>
-              </Block>
-            </form>
-          </Block>
-          <Block x="5">
-            <Well bsSize="small" >
-              <IconButton glyph="check" text="Done" onClick={this.handleDone} />
-              <IconButton glyph="floppy-save" text="Save" onClick={this.handleSave} />
-            </Well>
-          </Block>
-        </Container>
-        <Footer name="Mneme" copyright="2017" holder="Etudes, Inc." link="https://github.com/etudes-inc/etudes-apps"/>
+        <h2><Label>Edit Assessment: {this.id}</Label></h2>
+        <Block>
+          <form>
+            <FormGroup>
+              <ControlLabel>Type</ControlLabel>
+              <Radio name="type" value="test" checked={this.state.asmt.type==="test"}
+                  onChange={this.handleChange}>
+                Test
+              </Radio>
+              <Radio name="type" value="assignment" checked={this.state.asmt.type==="assignment"}
+                  onChange={this.handleChange}>
+                Assignment
+              </Radio>
+              <Radio name="type" value="survey" checked={this.state.asmt.type==="survey"}
+                  onChange={this.handleChange}>
+                Survey
+              </Radio>
+              <Radio name="type" value="offline" checked={this.state.asmt.type==="offline"}
+                  onChange={this.handleChange}>
+                Online
+              </Radio>
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>Title</ControlLabel>
+              <FormControl type="text" placeholder="Title"
+                  value={this.state.asmt.title}
+                  name="title" onChange={this.handleChange} />
+            </FormGroup>
+            <Checkbox>
+              This is for points
+            </Checkbox>
+            <div><IconButton glyph="check" text="Edit Instructions" onClick={this.handleDone} /></div>
+            <div><IconButton glyph="check" text="Manage Parts" onClick={this.handleDone} /></div>
+            <div><IconButton glyph="cog" text="Set Options" onClick={this.handleDone} /></div>
+            <Block>
+              <ControlLabel>Questions</ControlLabel>
+              <Well bsSize="small">
+                <IconButton glyph="check" text="Add" onClick={this.handleDone} />
+                <IconButton glyph="floppy-save" text="Select" onClick={this.handleSave} />
+                <IconButton glyph="floppy-save" text="Draw" onClick={this.handleSave} />
+                <IconButton glyph="floppy-save" text="Move" onClick={this.handleSave} />
+                <IconButton glyph="floppy-save" text="Remove" onClick={this.handleSave} />
+              </Well>
+              <Alert bsStyle="info">
+                No Questions
+              </Alert>
+            </Block>
+          </form>
+        </Block>
+        <Block x="5">
+          <Well bsSize="small" >
+            <IconButton glyph="check" text="Done" onClick={this.handleDone} />
+            <IconButton glyph="floppy-save" text="Save" onClick={this.handleSave} />
+          </Well>
+        </Block>
       </div>
     );
   }

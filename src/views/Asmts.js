@@ -25,10 +25,7 @@ The main, list of assessments view, for instructors and other assessment manager
 
 import React, { Component } from 'react';
 import { Alert } from 'react-bootstrap';
-import Container from '../components/Container';
 import Block from '../components/Block';
-import Footer from '../components/Footer';
-import AsmtsModes from '../views/AsmtsModes';
 import AsmtsList from '../views/AsmtsList';
 import API from '../services/API';
 import { Link } from 'react-router-dom';
@@ -91,13 +88,9 @@ class Asmts extends Component {
 
     return (
       <div>
-        <Container>
-          {alert}
-          <Block><AsmtsModes /></Block>
-          <Block><AsmtsList /></Block>
-          <Link to={link}>Sample</Link>
-        </Container>
-        <Footer name="Mneme" copyright="2017" holder="Etudes, Inc." link="https://github.com/etudes-inc/etudes-apps"/>
+        {alert}
+        <Block><AsmtsList /></Block>
+        <Link to={link}>Sample</Link>
       </div>
     );
   }

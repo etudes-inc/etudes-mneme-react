@@ -46,6 +46,8 @@ class Routes {
 
   def() {
     const routes = {
+      assessmentsHub: "/assessments",
+      submissionsHub: "/submissions",
       assessments: "/assessments",
       submissions: "/submissions",
       editAssessment: `/assessments/${this.params.id}/edit`

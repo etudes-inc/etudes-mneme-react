@@ -25,25 +25,34 @@
 
 import React, {Component} from "react";
 import Asmts from "./views/Asmts";
+import AssessmentsModes from "./views/AssessmentsModes";
 import EditAsmt from "./views/EditAsmt";
 import SampleApp from "./views/SampleApp";
-import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect, Switch} from "react-router-dom";
 import Routes from "./services/Routes";
+import Container from "./components/Container";
+import Footer from "./components/Footer";
 
 class App extends Component {
   render() {
     const assessmentsRoute = new Routes().to("assessments").def();
     const editRoute = new Routes().to("editAssessment").def();
+    const submissionsRoute = new Routes().to("submissions").def();
+    const assessmentsBaseRoute = new Routes().to("assessmentsHub").def();
 
     return (
       <Router>
-        <Switch>
-          <Route exact path={assessmentsRoute} component={Asmts} />
-          <Route exact path={editRoute} component={EditAsmt} />
-          <Route exact path='/sample/:msg' component={SampleApp} />
-          <Redirect exact from="/subs" to="/sample/submissions"/>
-          <Redirect exact from="/" to={assessmentsRoute}/>
-        </Switch>
+        <Container>
+          <Route path={assessmentsBaseRoute} component={AssessmentsModes} />
+          <Switch>
+            <Route exact path={assessmentsRoute} component={Asmts} />
+            <Route exact path={editRoute} component={EditAsmt} />
+            <Route exact path="/sample/:msg" component={SampleApp} />
+            <Redirect exact from={submissionsRoute} to="/sample/submissions"/>
+            <Redirect exact from="/" to={assessmentsRoute}/>
+          </Switch>
+          <Footer name="Mneme" copyright="2017" holder="Etudes, Inc." link="https://github.com/etudes-inc/etudes-apps"/>
+        </Container>
       </Router>
     );
   }
