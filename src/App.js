@@ -23,22 +23,26 @@
  The main management app for Mneme, with the router.
  */
 
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import Asmts from "./views/Asmts";
 import EditAsmt from "./views/EditAsmt";
 import SampleApp from "./views/SampleApp";
 import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
+import Routes from "./services/Routes";
 
 class App extends Component {
   render() {
+    const assessmentsRoute = new Routes().to("assessments").def();
+    const editRoute = new Routes().to("editAssessment").def();
+
     return (
       <Router>
         <Switch>
-          <Route path='/Asmts' component={Asmts} />
-          <Route path='/EditAsmt/:id' component={EditAsmt} />
-          <Route path='/Sample/:msg' component={SampleApp} />
-          <Redirect from="/Student" to="/Sample/Student"/>
-          <Redirect from="/" to="/Asmts"/>
+          <Route exact path={assessmentsRoute} component={Asmts} />
+          <Route exact path={editRoute} component={EditAsmt} />
+          <Route exact path='/sample/:msg' component={SampleApp} />
+          <Redirect exact from="/subs" to="/sample/submissions"/>
+          <Redirect exact from="/" to={assessmentsRoute}/>
         </Switch>
       </Router>
     );

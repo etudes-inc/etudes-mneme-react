@@ -33,6 +33,7 @@ import AsmtsModes from "../views/AsmtsModes";
 import IconButton from "../components/IconButton";
 import API from "../services/API";
 import Assessment from "../services/Assessment";
+import Routes from "../services/Routes";
 
 // import { Link } from "react-router-dom";
 
@@ -104,8 +105,8 @@ class EditAsmt extends Component {
     this.saveAssessment();
 
     // TODO: wait for save to be done?
-    const link = "/Asmts" + API.tokensQuery();
-    this.props.history.push(link);
+    const assessmentsRoute = new Routes().to("assessments").path();
+    this.props.history.push(assessmentsRoute);
     // this.props.history.goBack();
   }
 

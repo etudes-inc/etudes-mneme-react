@@ -53,7 +53,7 @@ class SampleApp extends Component {
   }
 
   render() {
-    const link = "/Asmts" + API.tokensQuery();
+    const link = "/assessments" + API.tokensQuery();
 
     return (
       <div>

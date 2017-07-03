@@ -40,13 +40,13 @@ class IconLink extends Component {
 
   render() {
     const spacing = {paddingLeft: 8, paddingRight: 8};
-
     const buttonAndText = <span><Glyphicon glyph={this.props.glyph} /> {this.props.text}</span>;
-    const noLink = <span style={spacing} title={this.props.tip}>{buttonAndText}</span>;
-    const link = <Link to={this.props.route} style={spacing} title={this.props.tip}>{buttonAndText}</Link>;
-    const element = (this.props.route === undefined) ? noLink : link;
 
-    return element;
+    return (this.props.route === undefined) ? (
+      <span style={spacing} title={this.props.tip}>{buttonAndText}</span>
+    ) : (
+      <Link to={this.props.route} style={spacing} title={this.props.tip}>{buttonAndText}</Link>
+    );
   }
 }
 

@@ -16,9 +16,10 @@
  *
  **********************************************************************************/
 
-import React, { Component } from 'react';
-import IconLink from '../components/IconLink';
-import { Well } from 'react-bootstrap';
+import React, { Component } from "react";
+import IconLink from "../components/IconLink";
+import { Well } from "react-bootstrap";
+import Routes from "../services/Routes";
 
 // A UI component showing a list of actions related to the table below
 // TODO: sort of hard coded for now
@@ -28,9 +29,11 @@ class TableActions extends Component {
   // }
 
   render() {
+    const addRoute = new Routes("editAssessment", 0).path();
+
     return (
       <Well bsSize="small">
-        <IconLink glyph="plus-sign" text="Add" tip="Add Assessment" route="/EditAsmt/0" />
+        <IconLink glyph="plus-sign" text="Add" tip="Add Assessment" route={addRoute}/>
         <IconLink glyph="remove-sign" text="Delete" />
         <IconLink glyph="ok-sign" text="Publish" />
         <IconLink glyph="minus-sign" text="Unpublish" />
