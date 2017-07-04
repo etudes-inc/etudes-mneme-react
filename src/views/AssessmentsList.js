@@ -31,7 +31,7 @@ import { Table, Glyphicon } from 'react-bootstrap';
 import API from '../services/API';
 import Assessment from '../services/Assessment';
 
-class AsmtsList extends Component {
+class AssessmentsList extends Component {
 
   // No properties
   static propTypes = {
@@ -152,4 +152,4 @@ class AsmtsList extends Component {
   }
 }
 
-export default AsmtsList;
+export default AssessmentsList;

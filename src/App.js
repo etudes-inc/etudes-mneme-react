@@ -24,7 +24,7 @@
  */
 
 import React, {Component} from "react";
-import Asmts from "./views/Asmts";
+import Assessments from "./views/Assessments";
 import AssessmentsModes from "./views/AssessmentsModes";
 import EditAsmt from "./views/EditAsmt";
 import SampleApp from "./views/SampleApp";
@@ -45,7 +45,7 @@ class App extends Component {
         <Container>
           <Route path={assessmentsBaseRoute} component={AssessmentsModes} />
           <Switch>
-            <Route exact path={assessmentsRoute} component={Asmts} />
+            <Route exact path={assessmentsRoute} component={Assessments} />
             <Route exact path={editRoute} component={EditAsmt} />
             <Route exact path="/sample/:msg" component={SampleApp} />
             <Redirect exact from={submissionsRoute} to="/sample/submissions"/>

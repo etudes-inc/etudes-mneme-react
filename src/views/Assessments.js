@@ -26,11 +26,11 @@ The main, list of assessments view, for instructors and other assessment manager
 import React, { Component } from 'react';
 import { Alert } from 'react-bootstrap';
 import Block from '../components/Block';
-import AsmtsList from '../views/AsmtsList';
+import AssessmentsList from '../views/AssessmentsList';
 import API from '../services/API';
 import { Link } from 'react-router-dom';
 
-class Asmts extends Component {
+class Assessments extends Component {
 
   // No props
   static propTypes = {
@@ -43,7 +43,7 @@ class Asmts extends Component {
     super(props);
 
     // state related to the TEMP welcome alert feature
-    this.state = {auth: {name: ""}, alertVisible: true};
+    this.state = {auth: {name: "User"}, alertVisible: true};
 
     this.closeAlert = this.closeAlert.bind(this);
   }
@@ -51,9 +51,11 @@ class Asmts extends Component {
   componentDidMount() {
     // load the authentication information
     this.load();
+    console.log("componentDidMount");
   }
 
   componentWillUnmount() {
+    console.log("componentWillUnmount");
   }
 
   // load the authentication information
@@ -89,11 +91,11 @@ class Asmts extends Component {
     return (
       <div>
         {alert}
-        <Block><AsmtsList /></Block>
+        <Block><AssessmentsList /></Block>
         <Link to={link}>Sample</Link>
       </div>
     );
   }
 }
 
-export default Asmts;
+export default Assessments;
