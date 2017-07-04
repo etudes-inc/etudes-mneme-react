@@ -22,7 +22,7 @@ import React from "react";
 //import ReactDOM from "react-dom";
 import ShallowRenderer from "react-test-renderer/shallow";
 import {MemoryRouter as Router} from "react-router-dom";
-import {Alert} from "react-bootstrap";
+import {Alert, Button} from "react-bootstrap";
 import Block from "../components/Block";
 import Assessments from "../views/Assessments";
 import AssessmentsList from "../views/AssessmentsList";
@@ -126,5 +126,15 @@ describe("with a full rendering allowing Assessments.componentDidMount", functio
 
     const alert = ReactTestUtils.findRenderedComponentWithType(component, Alert);
     expect(alert.props.children).toEqual([ "Hello ", "Sir Comference", "!  Welcome to Mneme." ]);
+  });
+
+  it("closes the alert when the close button is clicked", () => {
+    const component = ReactTestUtils.renderIntoDocument(<Router><Assessments /></Router>);
+
+    const alert = ReactTestUtils.scryRenderedComponentsWithType(component, Alert);
+    expect(alert.length).toBe(1);
+    alert[0].props.onDismiss();
+    const alertClosed = ReactTestUtils.scryRenderedComponentsWithType(component, Alert);
+    expect(alertClosed.length).toBe(0);
   });
 });

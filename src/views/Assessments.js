@@ -42,7 +42,7 @@ class Assessments extends Component {
 
   constructor(props) {
     super(props);
-    console.log("Assessments.constructor");
+    // console.log("Assessments.constructor");
 
     // state related to the TEMP welcome alert feature
     this.state = {auth: {name: "User"}, alertVisible: true};
@@ -53,11 +53,11 @@ class Assessments extends Component {
   componentDidMount() {
     // load the authentication information
     this.load();
-    console.log("Assessments.componentDidMount");
+    // console.log("Assessments.componentDidMount");
   }
 
   componentWillUnmount() {
-    console.log("Assessments.componentWillUnmount");
+    // console.log("Assessments.componentWillUnmount");
   }
 
   // load the authentication information
