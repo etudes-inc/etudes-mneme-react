@@ -31,7 +31,7 @@ class Block extends Component {
     if (this.props.x !== undefined) {
       margin *= parseInt(this.props.x, 10);
     }
-    const style={marginTop: margin};
+    const style=margin > 0 ? {marginTop: margin} : {marginBottom: -margin};
 
     return (
       <div style={style}>

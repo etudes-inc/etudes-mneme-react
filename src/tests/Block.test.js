@@ -40,12 +40,23 @@ it("adds a div wrapper with top margin", () => {
 
 it("adds a div wrapper with parameterized top margin", () => {
   const renderer = new ShallowRenderer();
-  renderer.render(<Block x="2" />);
+  renderer.render(<Block x={2} />);
   const result = renderer.getRenderOutput();
 
   expect(result.type).toBe("div");
   expect(result.props.style.marginTop).toBeDefined();
   expect(result.props.style.marginTop).toBe(40);
+});
+
+it("adds a div wrapper with special parameter bottom margin", () => {
+  const renderer = new ShallowRenderer();
+  renderer.render(<Block x={-1} />);
+  const result = renderer.getRenderOutput();
+
+  expect(result.type).toBe("div");
+  expect(result.props.style.marginTop).toBeUndefined();
+  expect(result.props.style.marginBottom).toBeDefined();
+  expect(result.props.style.marginBottom).toBe(20);
 });
 
 it("adds a div wrapper to its single child", () => {
