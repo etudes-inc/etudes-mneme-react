@@ -20,9 +20,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Container from "../components/Container";
 import ShallowRenderer from "react-test-renderer/shallow";
-// import ReactTestUtils from "react-dom/test-utils";
 
-// tests for the <Container /> components
+/*
+Container.test.js
+test
+
+Tests for the <Container /> components.
+*/
 
 it("adds a div wrapper with Bootstrap's container-fluid class", () => {
   const renderer = new ShallowRenderer();

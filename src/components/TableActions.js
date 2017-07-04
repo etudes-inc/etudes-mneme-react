@@ -21,8 +21,15 @@ import IconLink from "../components/IconLink";
 import { Well } from "react-bootstrap";
 import Routes from "../services/Routes";
 
-// A UI component showing a list of actions related to the table below
-// TODO: sort of hard coded for now
+/*
+TableActions.js
+component
+
+A UI component showing a list of actions related to the table below.
+
+TODO: sort of hard coded for now
+*/
+
 class TableActions extends Component {
   // constructor(props) {
   //   super(props);

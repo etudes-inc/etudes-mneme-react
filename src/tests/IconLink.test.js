@@ -23,7 +23,12 @@ import ShallowRenderer from "react-test-renderer/shallow";
 import {Link} from 'react-router-dom';
 import {Glyphicon} from 'react-bootstrap';
 
-// tests for the <IconLink /> components
+/*
+IconLink.test.js
+test
+
+Tests for the <IconLink /> components.
+*/
 
 it("renders a Link when a route is defined", () => {
   const renderer = new ShallowRenderer();

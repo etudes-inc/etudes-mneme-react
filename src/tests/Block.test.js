@@ -20,9 +20,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Block from "../components/Block";
 import ShallowRenderer from "react-test-renderer/shallow";
-// import ReactTestUtils from "react-dom/test-utils";
 
-// tests for the <Block /> components
+/*
+Block.test.js
+test
+
+Tests for the <Block /> components.
+*/
 
 it("adds a div wrapper with top margin", () => {
   const renderer = new ShallowRenderer();

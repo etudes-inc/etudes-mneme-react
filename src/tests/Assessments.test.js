@@ -16,19 +16,58 @@
  *
  **********************************************************************************/
 
+jest.mock("../services/Authentication");
+
 import React from "react";
 //import ReactDOM from "react-dom";
 import ShallowRenderer from "react-test-renderer/shallow";
-import { Alert } from "react-bootstrap";
+import {MemoryRouter as Router} from "react-router-dom";
+import {Alert} from "react-bootstrap";
 import Block from "../components/Block";
 import Assessments from "../views/Assessments";
 import AssessmentsList from "../views/AssessmentsList";
 import ReactTestUtils from "react-dom/test-utils";
-import {MemoryRouter as Router} from "react-router-dom";
+import Authentication from "../services/Authentication";
 
-// tests for the <Assessments /> view (component)
+/*
+Assessments.test.js
+test
 
-it("has has div containing a block holding an AssessmentsList", () => {
+Tests for the <Assessments /> view (component).
+*/
+
+// http://engineering.pivotal.io/post/stub-dont-shallow-render-your-child-components/
+const stubComponent = function(componentClass, methods) {
+  const lifecycleMethods = [
+      'render',
+      'componentWillMount',
+      'componentDidMount',
+      'componentWillReceiveProps',
+      'shouldComponentUpdate',
+      'componentWillUpdate',
+      'componentDidUpdate',
+      'componentWillUnmount'
+  ];
+  const methodsToStub = methods === undefined? lifecycleMethods : methods;
+
+  const originalPropTypes = componentClass.propTypes;
+
+  beforeEach(function() {
+    const originalPropTypes = componentClass.propTypes;
+
+    methodsToStub.forEach(method => {
+      if(typeof componentClass.prototype[method] !== 'undefined') {
+        spyOn(componentClass.prototype, method).and.returnValue(null);
+      }
+    });
+  });
+
+  afterEach( () => {
+    componentClass.propTypes = originalPropTypes;
+  });
+};
+
+it("has div containing a block holding an AssessmentsList", () => {
   const renderer = new ShallowRenderer();
   renderer.render(<Assessments />);
   const result = renderer.getRenderOutput();
@@ -39,7 +78,7 @@ it("has has div containing a block holding an AssessmentsList", () => {
 });
 
 // temp feature - will eventually contain only one
-it("has a div containing 3 elements", () => {
+it("has a div containing 3 elements (temp feature)", () => {
   const renderer = new ShallowRenderer();
   renderer.render(<Assessments />);
   const result = renderer.getRenderOutput();
@@ -61,63 +100,31 @@ it("has a div containing, as the first element, an info Alert with this message"
   expect(result.props.children[0].props.children).toEqual([ "Hello ", "User", "!  Welcome to Mneme." ]);
 });
 
-// http://engineering.pivotal.io/post/stub-dont-shallow-render-your-child-components/
-describe("Testing", function(){
+describe("with a full rendering", function(){
+  stubComponent(Assessments, ["componentDidMount", "componentWillUnmount"]);
+  stubComponent(AssessmentsList);
 
-  const stubComponentP = function(componentClass) {
-    var originalPropTypes;
-
-    beforeEach(function() {
-      originalPropTypes = componentClass.propTypes;
-
-      componentClass.propTypes = {};
-
-      spyOn(componentClass.prototype, 'render').and.returnValue(null);
-      spyOn(componentClass.prototype, 'componentWillMount').and.returnValue(null);
-      spyOn(componentClass.prototype, 'componentDidMount').and.returnValue(null);
-      spyOn(componentClass.prototype, 'componentWillReceiveProps').and.returnValue(null);
-      spyOn(componentClass.prototype, 'shouldComponentUpdate').and.returnValue(null);
-      spyOn(componentClass.prototype, 'componentWillUpdate').and.returnValue(null);
-      spyOn(componentClass.prototype, 'componentDidUpdate').and.returnValue(null);
-      spyOn(componentClass.prototype, 'componentWillUnmount').and.returnValue(null);
-    });
-
-    afterEach(function() {
-      componentClass.propTypes = originalPropTypes;
-    });
-  };
-
-  var _ = require('lodash');
-
-  const lifecycleMethods = [
-      'render',
-      'componentWillMount',
-      'componentDidMount',
-      'componentWillReceiveProps',
-      'shouldComponentUpdate',
-      'componentWillUpdate',
-      'componentDidUpdate',
-      'componentWillUnmount'
-  ];
-
-  const stubComponent = function(componentClass) {
-    beforeEach(function() {
-      _.each(lifecycleMethods, function(method) {
-        if(typeof componentClass.prototype[method] !== 'undefined') {
-          spyOn(componentClass.prototype, method).and.returnValue(null);
-        }
-      });
-    });
-  };
-
-  stubComponent(Assessments);
-
-  // temp feature - will eventually contain only one
-  it("testing ...", () => {
-
+  it("starts with a default auth.name of 'User', and the alert visible, with the default text", () => {
     const component = ReactTestUtils.renderIntoDocument(<Router><Assessments /></Router>);
-    console.log(component);
-    const childComponent = ReactTestUtils.findRenderedComponentWithType(component, Assessments);
-    console.log(childComponent);
+
+    const a = ReactTestUtils.findRenderedComponentWithType(component, Assessments);
+    expect(a.state.auth.name).toBe("User");
+    expect(a.state.alertVisible).toBeTruthy();
+
+    const alert = ReactTestUtils.findRenderedComponentWithType(component, Alert);
+    expect(alert.props.children).toEqual([ "Hello ", "User", "!  Welcome to Mneme." ]);
+  });
+});
+
+describe("with a full rendering allowing Assessments.componentDidMount", function(){
+  stubComponent(Assessments, ["componentWillUnmount"]);
+  stubComponent(AssessmentsList);
+
+  it("calls for authentication info, then shows it in the alert text", () => {
+    Authentication.__setup__("info",{givenName: "Sir", familyName: "Comference"});
+    const component = ReactTestUtils.renderIntoDocument(<Router><Assessments /></Router>);
+
+    const alert = ReactTestUtils.findRenderedComponentWithType(component, Alert);
+    expect(alert.props.children).toEqual([ "Hello ", "Sir Comference", "!  Welcome to Mneme." ]);
   });
 });

@@ -21,7 +21,13 @@ import {string} from 'prop-types'
 import {Glyphicon} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
-// A UI Link rendered as a small icon
+/*
+IconLink.js
+component
+
+A UI Link rendered as a small icon.
+*/
+
 class IconLink extends Component {
 
   static propTypes = {

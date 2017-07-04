@@ -18,7 +18,13 @@
 
 import React, { Component } from 'react';
 
-// A UI component to add a TD with a checkbox in a table
+/*
+TableCheckbox.js
+component
+
+A UI component to add a TD with a checkbox in a table.
+*/
+
 class TableCheckbox extends Component {
   render() {
     const narrow = {width: 16};

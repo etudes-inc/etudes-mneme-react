@@ -17,7 +17,7 @@
  **********************************************************************************/
 
 /*
-AsmtsList.js
+AssessmentsList.js
 Mneme / React UI / Views / Management View / Assessments List View-Component
 
 A list of assessments component, with management features.

@@ -19,7 +19,13 @@
 import React, { Component } from 'react';
 import { string } from 'prop-types'
 
-// A footer with product and contact information
+/*
+Footer.js
+component
+
+A footer with product and contact information.
+*/
+
 class Footer extends Component {
 
   static propTypes = {

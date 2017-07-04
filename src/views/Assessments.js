@@ -25,10 +25,11 @@ The main, list of assessments view, for instructors and other assessment manager
 
 import React, { Component } from 'react';
 import { Alert } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Block from '../components/Block';
 import AssessmentsList from '../views/AssessmentsList';
 import API from '../services/API';
-import { Link } from 'react-router-dom';
+import Authentication from '../services/Authentication';
 
 class Assessments extends Component {
 
@@ -41,6 +42,7 @@ class Assessments extends Component {
 
   constructor(props) {
     super(props);
+    console.log("Assessments.constructor");
 
     // state related to the TEMP welcome alert feature
     this.state = {auth: {name: "User"}, alertVisible: true};
@@ -51,23 +53,21 @@ class Assessments extends Component {
   componentDidMount() {
     // load the authentication information
     this.load();
-    console.log("componentDidMount");
+    console.log("Assessments.componentDidMount");
   }
 
   componentWillUnmount() {
-    console.log("componentWillUnmount");
+    console.log("Assessments.componentWillUnmount");
   }
 
   // load the authentication information
   load() {
-    fetch("/api/auth/info" + API.tokensQuery())
-      .then((response) => {return response.json();})
-      .then((data) => {
-        // update the state with the user name from the authentication
-        const name = [data.givenName, data.familyName].join(" ");
-        const newState = {auth: {name: name}};
-        this.setState(newState);
-      });
+    Authentication.info(data => {
+      // update the state with the user name from the authentication
+      const name = [data.givenName, data.familyName].join(" ");
+      const newState = {auth: {name: name}};
+      this.setState(newState);
+    });
   }
 
   // to close the welcome alert

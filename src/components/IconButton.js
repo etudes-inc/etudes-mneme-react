@@ -20,7 +20,13 @@ import React, { Component } from 'react';
 import { string, func } from 'prop-types'
 import { Glyphicon } from 'react-bootstrap';
 
-// A UI button rendered as a small icon
+/*
+IconButton.js
+component
+
+A UI button rendered as a small icon.
+*/
+
 class IconButton extends Component {
 
   static propTypes = {

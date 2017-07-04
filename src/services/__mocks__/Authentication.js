@@ -16,29 +16,24 @@
  *
  **********************************************************************************/
 
-import React, { Component } from 'react';
+ /*
+ __mocks__/Authentication.js
+ mock service
 
-/*
-Block.js
-component
+ Access to the authentication information on the server.
+ */
 
-Provide a UI zone with some spacing.
-*/
+const Authentication = jest.genMockFromModule("../../services/Authentication");
 
-class Block extends Component {
-  render() {
-    let margin = 20;
-    if (this.props.x !== undefined) {
-      margin *= parseInt(this.props.x, 10);
-    }
-    const style={marginTop: margin};
+const valueToReturn = {};
 
-    return (
-      <div style={style}>
-        {this.props.children}
-      </div>
-    );
-  }
+Authentication.info = function(callback) {
+  const rv = valueToReturn["info"] || {givenName: "J.", familyName: "Smith"};
+  callback(rv);
 }
 
-export default Block;
+Authentication.__setup__ = function(methodName, valueToReturnForMethod) {
+    valueToReturn[methodName] = valueToReturnForMethod;
+}
+
+export default Authentication;

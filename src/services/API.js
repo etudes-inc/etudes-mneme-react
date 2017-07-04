@@ -16,7 +16,13 @@
  *
  **********************************************************************************/
 
-// Support service for forming fetch URLs to REST with the server
+ /*
+ API.js
+ service
+
+ Support service for forming fetch URLs to REST with the server.
+ */
+
 class API {
   static getParameterByName(name) {
     const match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);

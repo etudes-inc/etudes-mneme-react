@@ -16,29 +16,30 @@
  *
  **********************************************************************************/
 
-import React, { Component } from 'react';
+import API from "../services/API";
 
 /*
-Block.js
-component
+Assessment.js
+service
 
-Provide a UI zone with some spacing.
+Access to the authentication information on the server.
 */
 
-class Block extends Component {
-  render() {
-    let margin = 20;
-    if (this.props.x !== undefined) {
-      margin *= parseInt(this.props.x, 10);
-    }
-    const style={marginTop: margin};
+class Authentication {
 
-    return (
-      <div style={style}>
-        {this.props.children}
-      </div>
-    );
+  // fetch the authentication information - returns a promise .then(authentication) => {}
+  // Prefer the callback version, since that is (more?) mockable for tests
+  // static info() {
+  //   return fetch("/api/auth/info" + API.tokensQuery())
+  //     .then((response) => {return response.json();});
+  // }
+
+  // fetch the authentication information - calls back with the data
+  static info(callback) {
+    return fetch("/api/auth/info" + API.tokensQuery())
+      .then((response) => {return response.json();})
+      .then((data) => {callback(data);});
   }
 }
 
-export default Block;
+export default Authentication;

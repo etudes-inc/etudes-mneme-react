@@ -16,7 +16,13 @@
  *
  **********************************************************************************/
 
-// Support service for working with Assessments
+ /*
+ Assessment.js
+ service
+
+ Support service for working with Assessments.
+ */
+
 class Assessment {
   static adjustAssessmentFromServer(asmt) {
     // make real dates from the schedule

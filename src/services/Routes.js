@@ -16,12 +16,18 @@
  *
  **********************************************************************************/
 
- import API from "../services/API";
+import API from "../services/API";
 
-// Source of truth for in-app routes
-// usage: new Routes().to("editAssessment").id(0).path();
-// usage: new Routes("editAssessment",0).path();
-// for defining the path: new Routes().to("editAssessment").def();
+ /*
+ Routes.js
+ service
+
+ Source of truth for in-app routes
+ usage: new Routes().to("editAssessment").id(0).path();
+ usage: new Routes("editAssessment",0).path();
+ for defining the path: new Routes().to("editAssessment").def();
+ */
+
 class Routes {
 
   constructor(toParam, idParam) {

@@ -21,7 +21,12 @@ import ReactDOM from "react-dom";
 import Footer from "../components/Footer";
 import ShallowRenderer from "react-test-renderer/shallow";
 
-// tests for the <Footer /> components
+/*
+Footer.test.js
+test
+
+Tests for the <Footer /> components.
+*/
 
 it("adds a div fixed to the bottom of the page, using Bootstrap's navbar components", () => {
   const renderer = new ShallowRenderer();

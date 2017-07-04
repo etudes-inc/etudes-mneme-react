@@ -18,6 +18,13 @@
 
 import React, { Component } from 'react';
 
+/*
+Container.js
+component
+
+Wrap children in a Bootstap "container-fluid" UI component.
+*/
+
 // a Bootstap fluid container UI component
 class Container extends Component {
   render() {
