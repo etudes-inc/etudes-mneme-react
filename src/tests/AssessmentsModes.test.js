@@ -22,6 +22,7 @@ import ShallowRenderer from "react-test-renderer/shallow";
 import {Nav, NavItem, Glyphicon} from "react-bootstrap";
 import AssessmentsModes from "../views/AssessmentsModes";
 import Block from "../components/Block";
+import Routes from "../services/Routes";
 
 /*
 AssessmentsModes.test.js
@@ -29,6 +30,12 @@ test
 
 Tests for the <AssessmentsModes /> view (component).
 */
+
+const navs = [
+  {title: "Assessments", icon: "folder-open", path: new Routes().to(Routes.assessments).def()},
+  {title: "Question Pools", icon: "briefcase", path: new Routes().to(Routes.assessments).def()},
+  {title: "Grading", icon: "pencil", path: new Routes().to(Routes.assessments).def()},
+  {title: "Test Drive", icon: "flash", path: new Routes().to(Routes.assessments).def()}];
 
 it("has a Bootstrap Nav with a 'tabs' style", () => {
   const tree = ReactTestUtils.renderIntoDocument(<AssessmentsModes />);
@@ -41,11 +48,6 @@ it("has a 4 NavItems, with these names (and title property) then icons, in order
   const nav = ReactTestUtils.scryRenderedComponentsWithType(tree, NavItem);
   expect(nav.length).toBe(4);
 
-  const navs = [
-    {title: "Assessments", icon: "folder-open"},
-    {title: "Question Pools", icon: "briefcase"},
-    {title: "Grading", icon: "pencil"},
-    {title: "Test Drive", icon: "flash"}];
   navs.forEach((n, index) => {
     expect(nav[index].props.title).toBe(n.title);
     expect(ReactTestUtils.findRenderedComponentWithType(nav[index], Glyphicon).props.glyph).toBe(n.icon);
@@ -68,30 +70,30 @@ it("start with NavItem 1, and changes to each other active tab when the tab is c
   const tree = ReactTestUtils.renderIntoDocument(<AssessmentsModes history={history}/>);
   let nav = ReactTestUtils.findRenderedComponentWithType(tree, Nav);
   expect(nav.props.onSelect).toBeDefined();
-  expect(nav.props.activeKey).toBe("1");
+  expect(nav.props.activeKey).toBe(0);
 
-  nav.props.onSelect("1");
+  nav.props.onSelect(0);
   nav = ReactTestUtils.findRenderedComponentWithType(tree, Nav);
-  expect(nav.props.activeKey).toBe("1");
-  expect(path).toBe("/sample/1");
+  expect(nav.props.activeKey).toBe(0);
+  expect(path.split("?")[0]).toBe(navs[0].path);
 
-  nav.props.onSelect("2");
+  nav.props.onSelect(1);
   nav = ReactTestUtils.findRenderedComponentWithType(tree, Nav);
-  expect(nav.props.activeKey).toBe("2");
-  expect(path).toBe("/sample/2");
+  expect(nav.props.activeKey).toBe(1);
+  expect(path.split("?")[0]).toBe(navs[1].path);
 
-  nav.props.onSelect("3");
+  nav.props.onSelect(2);
   nav = ReactTestUtils.findRenderedComponentWithType(tree, Nav);
-  expect(nav.props.activeKey).toBe("3");
-  expect(path).toBe("/sample/3");
+  expect(nav.props.activeKey).toBe(2);
+  expect(path.split("?")[0]).toBe(navs[2].path);
 
-  nav.props.onSelect("4");
+  nav.props.onSelect(3);
   nav = ReactTestUtils.findRenderedComponentWithType(tree, Nav);
-  expect(nav.props.activeKey).toBe("4");
-  expect(path).toBe("/sample/4");
+  expect(nav.props.activeKey).toBe(3);
+  expect(path.split("?")[0]).toBe(navs[3].path);
 
-  nav.props.onSelect("1");
+  nav.props.onSelect(0);
   nav = ReactTestUtils.findRenderedComponentWithType(tree, Nav);
-  expect(nav.props.activeKey).toBe("1");
-  expect(path).toBe("/sample/1");
+  expect(nav.props.activeKey).toBe(0);
+  expect(path.split("?")[0]).toBe(navs[0].path);
 });

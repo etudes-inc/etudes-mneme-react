@@ -26,6 +26,7 @@
 import React, { Component } from "react";
 import { Nav, NavItem , Glyphicon } from "react-bootstrap";
 import Block from "../components/Block";
+import Routes from "../services/Routes";
 
 class AssessmentsModes extends Component {
 
@@ -38,7 +39,14 @@ class AssessmentsModes extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {active: "1"};
+    this.state = {active: 0};
+
+    this.modes = [
+      {title: "Assessments", icon: "folder-open", route: Routes.assessments},
+      {title: "Question Pools", icon: "briefcase", route: Routes.assessments},
+      {title: "Grading", icon: "pencil", route: Routes.assessments},
+      {title: "Test Drive", icon: "flash", route: Routes.assessments}
+    ];
 
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -47,17 +55,20 @@ class AssessmentsModes extends Component {
     const newState = {active: eventKey};
     this.setState(newState);
 
-    this.props.history.push("/sample/" + eventKey);
+    this.props.history.push(new Routes().to(this.modes[eventKey].route).path());
   }
 
   render() {
+
+    let navItems = [];
+    for(let i = 0; i < this.modes.length; i++) {
+      navItems.push(<NavItem key={i} eventKey={i} title={this.modes[i].title}><Glyphicon glyph={this.modes[i].icon} />{" " + this.modes[i].title}</NavItem>);
+    }
+
     return (
       <Block x={-1}>
         <Nav bsStyle="tabs" activeKey={this.state.active} onSelect={this.handleSelect}>
-          <NavItem eventKey="1" title="Assessments"><Glyphicon glyph="folder-open" /> Assessments</NavItem>
-          <NavItem eventKey="2" title="Question Pools"><Glyphicon glyph="briefcase" /> Question Pools</NavItem>
-          <NavItem eventKey="3" title="Grading"><Glyphicon glyph="pencil" /> Grading</NavItem>
-          <NavItem eventKey="4" title="Test Drive"><Glyphicon glyph="flash" /> Test Drive</NavItem>
+          {navItems}
         </Nav>
       </Block>
     );

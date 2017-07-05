@@ -23,12 +23,18 @@ import API from "../services/API";
  service
 
  Source of truth for in-app routes
- usage: new Routes().to("editAssessment").id(0).path();
- usage: new Routes("editAssessment",0).path();
- for defining the path: new Routes().to("editAssessment").def();
+ usage: new Routes().to(Routes.editAssessment).id(0).path();
+ usage: new Routes(Routes.editAssessment,0).path();
+ for defining the path: new Routes().to(Routes.editAssessment).def();
  */
 
 class Routes {
+
+  static assessmentsHub = "assessmentsHub";
+  static submissionsHub = "submissionsHub";
+  static assessments = "assessments";
+  static submissions = "submissions";
+  static editAssessment = "editAssessment";
 
   constructor(toParam, idParam) {
     this.params = {to:"", id:":id"};
