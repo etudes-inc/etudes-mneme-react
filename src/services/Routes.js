@@ -35,6 +35,9 @@ class Routes {
   static assessments = "assessments";
   static submissions = "submissions";
   static editAssessment = "editAssessment";
+  static pools = "pools";
+  static grading = "grading";
+  static testDrive = "testDrive";
 
   constructor(toParam, idParam) {
     this.params = {to:"", id:":id"};
@@ -62,7 +65,10 @@ class Routes {
       submissionsHub: "/submissions",
       assessments: "/assessments",
       submissions: "/submissions",
-      editAssessment: `/assessments/${this.params.id}/edit`
+      editAssessment: `/assessments/${this.params.id}/edit`,
+      pools: "/assessments/pools",
+      grading: "/assessments/grading",
+      testDrive: "/assessments/testDrive"
     }
 
     return routes[this.params.to];

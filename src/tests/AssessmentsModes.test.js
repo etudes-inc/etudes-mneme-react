@@ -33,9 +33,9 @@ Tests for the <AssessmentsModes /> view (component).
 
 const navs = [
   {title: "Assessments", icon: "folder-open", path: new Routes().to(Routes.assessments).def()},
-  {title: "Question Pools", icon: "briefcase", path: new Routes().to(Routes.assessments).def()},
-  {title: "Grading", icon: "pencil", path: new Routes().to(Routes.assessments).def()},
-  {title: "Test Drive", icon: "flash", path: new Routes().to(Routes.assessments).def()}];
+  {title: "Question Pools", icon: "briefcase", path: new Routes().to(Routes.pools).def()},
+  {title: "Grading", icon: "pencil", path: new Routes().to(Routes.grading).def()},
+  {title: "Test Drive", icon: "flash", path: new Routes().to(Routes.testDrive).def()}];
 
 it("has a Bootstrap Nav with a 'tabs' style", () => {
   const tree = ReactTestUtils.renderIntoDocument(<AssessmentsModes />);

@@ -43,9 +43,9 @@ class AssessmentsModes extends Component {
 
     this.modes = [
       {title: "Assessments", icon: "folder-open", route: Routes.assessments},
-      {title: "Question Pools", icon: "briefcase", route: Routes.assessments},
-      {title: "Grading", icon: "pencil", route: Routes.assessments},
-      {title: "Test Drive", icon: "flash", route: Routes.assessments}
+      {title: "Question Pools", icon: "briefcase", route: Routes.pools},
+      {title: "Grading", icon: "pencil", route: Routes.grading},
+      {title: "Test Drive", icon: "flash", route: Routes.testDrive}
     ];
 
     this.handleSelect = this.handleSelect.bind(this);

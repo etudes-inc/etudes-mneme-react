@@ -125,7 +125,7 @@ class EditAsmt extends Component {
   render() {
     return (
       <div>
-        <h2><Label>Edit Assessment: {this.id}</Label></h2>
+        <h3><Label bsStyle="info">Edit Assessment: {this.id}</Label></h3>
         <Block>
           <form>
             <FormGroup>

@@ -27,6 +27,9 @@ import React, {Component} from "react";
 import Assessments from "./views/Assessments";
 import AssessmentsModes from "./views/AssessmentsModes";
 import EditAsmt from "./views/EditAsmt";
+import Pools from "./views/Pools";
+import Grading from "./views/Grading";
+import TestDrive from "./views/TestDrive";
 import SampleApp from "./views/SampleApp";
 import {BrowserRouter as Router, Route, Redirect, Switch} from "react-router-dom";
 import Routes from "./services/Routes";
@@ -35,10 +38,13 @@ import Footer from "./components/Footer";
 
 class App extends Component {
   render() {
-    const assessmentsRoute = new Routes().to("assessments").def();
-    const editRoute = new Routes().to("editAssessment").def();
-    const submissionsRoute = new Routes().to("submissions").def();
-    const assessmentsBaseRoute = new Routes().to("assessmentsHub").def();
+    const assessmentsRoute = new Routes().to(Routes.assessments).def();
+    const editRoute = new Routes().to(Routes.editAssessment).def();
+    const submissionsRoute = new Routes().to(Routes.submissions).def();
+    const assessmentsBaseRoute = new Routes().to(Routes.assessmentsHub).def();
+    const poolsRoute = new Routes().to(Routes.pools).def();
+    const gradingRoute = new Routes().to(Routes.grading).def();
+    const testDriveRoute = new Routes().to(Routes.testDrive).def();
 
     return (
       <Router>
@@ -47,6 +53,10 @@ class App extends Component {
           <Switch>
             <Route exact path={assessmentsRoute} component={Assessments} />
             <Route exact path={editRoute} component={EditAsmt} />
+            <Route exact path={editRoute} component={EditAsmt} />
+            <Route exact path={poolsRoute} component={Pools} />
+            <Route exact path={gradingRoute} component={Grading} />
+            <Route exact path={testDriveRoute} component={TestDrive} />
             <Route exact path="/sample/:msg" component={SampleApp} />
             <Redirect exact from={submissionsRoute} to="/sample/submissions"/>
             <Redirect exact from="/" to={assessmentsRoute}/>
