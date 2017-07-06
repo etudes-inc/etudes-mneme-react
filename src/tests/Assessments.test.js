@@ -97,7 +97,7 @@ it("has a div containing, as the first element, an info Alert with this message"
   expect(result.props.children).toBeDefined();
   expect(result.props.children[0].type).toBe(Alert);
   expect(result.props.children[0].props.bsStyle).toBe("info");
-  expect(result.props.children[0].props.children).toEqual([ "Hello ", "User", "!  Welcome to Mneme." ]);
+  expect(result.props.children[0].props.children).toEqual([ "Hello ", "User", "!  Welcome to Mneme in context ", "context", ", placement ", "placement", "." ]);
 });
 
 describe("with a full rendering", function(){
@@ -112,7 +112,7 @@ describe("with a full rendering", function(){
     expect(a.state.alertVisible).toBeTruthy();
 
     const alert = ReactTestUtils.findRenderedComponentWithType(component, Alert);
-    expect(alert.props.children).toEqual([ "Hello ", "User", "!  Welcome to Mneme." ]);
+    expect(alert.props.children).toEqual([ "Hello ", "User", "!  Welcome to Mneme in context ", "context", ", placement ", "placement", "." ]);
   });
 });
 
@@ -121,11 +121,11 @@ describe("with a full rendering allowing Assessments.componentDidMount", functio
   stubComponent(AssessmentsList);
 
   it("calls for authentication info, then shows it in the alert text", () => {
-    Authentication.__setup__("info",{givenName: "Sir", familyName: "Comference"});
+    Authentication.__setup__("info",{givenName: "Sir", familyName: "Comference", context: "Course", placement: "Link"});
     const component = ReactTestUtils.renderIntoDocument(<Router><Assessments /></Router>);
 
     const alert = ReactTestUtils.findRenderedComponentWithType(component, Alert);
-    expect(alert.props.children).toEqual([ "Hello ", "Sir Comference", "!  Welcome to Mneme." ]);
+    expect(alert.props.children).toEqual([ "Hello ", "Sir Comference", "!  Welcome to Mneme in context ", "Course", ", placement ", "Link", "." ]);
   });
 
   it("closes the alert when the close button is clicked", () => {

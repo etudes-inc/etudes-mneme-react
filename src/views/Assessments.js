@@ -45,7 +45,7 @@ class Assessments extends Component {
     // console.log("Assessments.constructor");
 
     // state related to the TEMP welcome alert feature
-    this.state = {auth: {name: "User"}, alertVisible: true};
+    this.state = {auth: {name: "User", context: "context", placement: "placement"}, alertVisible: true};
 
     this.closeAlert = this.closeAlert.bind(this);
   }
@@ -65,7 +65,7 @@ class Assessments extends Component {
     Authentication.info(data => {
       // update the state with the user name from the authentication
       const name = [data.givenName, data.familyName].join(" ");
-      const newState = {auth: {name: name}};
+      const newState = {auth: {name: name, context: data.context, placement: data.placement}};
       this.setState(newState);
     });
   }
@@ -81,7 +81,7 @@ class Assessments extends Component {
     // a TEMP feature to demonstrate authentication info - showing a welcome alert
     const alert = this.state.alertVisible ? (
       <Alert bsStyle="info" onDismiss={this.closeAlert}>
-        Hello {this.state.auth.name}!  Welcome to Mneme.
+        Hello {this.state.auth.name}!  Welcome to Mneme in context {this.state.auth.context}, placement {this.state.auth.placement}.
       </Alert>
     ) : null;
 
